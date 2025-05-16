@@ -50,8 +50,8 @@ This project is a simple Autofill Input feature built using **React** with **Vit
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/autofill-lru-react.git
-cd autofill-lru-react
+git clone https://github.com/abhiGithub302/Autofill_input.git
+cd Autofill_input
 
 # Install dependencies
 npm install

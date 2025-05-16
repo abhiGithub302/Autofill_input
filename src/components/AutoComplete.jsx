@@ -50,7 +50,7 @@ const AutoComplete = () => {
     const parts = text.split(regex);
 
     return parts.map((part, index) => 
-      regex.test(part) ? <span key={index} className="highlight"> {part} </span> : <span key={index}> {part} </span>
+      regex.test(part) ? <span key={index} className="highlight"> {part} </span> : <span key={index} className="high"> {part} </span>
     );
   };
 

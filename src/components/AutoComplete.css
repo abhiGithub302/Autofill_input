@@ -129,6 +129,9 @@
   color: #4285f4;
   font-weight: bold;
 }
+.high{
+  color: #4285f4;
+}
 
 .suggestion-item span {
   display: inline-block;
