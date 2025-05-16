@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import useDebounce from '../hooks/useDebounce';
-import LRUCache from '../utils/LRUCache';
+import LRUCache from '../utils/lruCache';
 import { suggestions } from '../data/suggestions';
 import './AutoComplete.css';
 
@@ -45,14 +45,45 @@ const AutoComplete = () => {
 
   const highlightMatch = (text, query) => {
     if (!query) return text;
-
+  
+    
+    const formattedText = text.replace(/React(?!\s)/g, 'React ');
+  
     const regex = new RegExp(`(${query})`, 'gi');
-    const parts = text.split(regex);
-
-    return parts.map((part, index) => 
-      regex.test(part) ? <span key={index} className="highlight"> {part} </span> : <span key={index} className="high"> {part} </span>
-    );
+  
+    
+    const parts = formattedText.split(regex);
+  
+    return parts.map((part, index) => {
+      if (regex.test(part)) {
+        
+        const subParts = part.split(/(\s+)/); // split by spaces, keep spaces
+  
+        return (
+          <span key={index} className="highlight">
+            {subParts.map((subPart, subIndex) =>
+              /\s+/.test(subPart) ? (
+                subPart 
+              ) : (
+                <span key={subIndex}>{subPart}</span> 
+              )
+            )}
+          </span>
+        );
+      } else {
+        
+        const subParts = part.split(/(\s+)/);
+        return (
+          <span key={index} className="high">
+            {subParts.map((subPart, subIndex) =>
+              /\s+/.test(subPart) ? subPart : <span key={subIndex}>{subPart}</span>
+            )}
+          </span>
+        );
+      }
+    });
   };
+  
 
   const handleClear = () => {
     setSearchTerm('');
